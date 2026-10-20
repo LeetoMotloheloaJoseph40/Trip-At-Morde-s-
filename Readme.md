@@ -17,9 +17,9 @@ Trip-At-Morde-s-/
 ├── about.md
 ├── inspo.md
 └── thanks.md
+
 Tracklist
 
-The order below is a working order. Update it to match the final sequence.
 
 #	Title
 1	WELCOME
@@ -39,16 +39,8 @@ The order below is a working order. Update it to match the final sequence.
 15	Trippie @Morde's
 16	Who !
 17	OutRo
-<!-- TODO: add the 18th track and any featured artists named in the full titles. -->
-Run the showcase page
 
-Open index.html in a browser. To publish it, go to Settings → Pages, choose the main branch and the root folder, and save.
 
-The page reads the audio/ folder from GitHub and lists every audio file it finds (mp3, wav, flac, m4a, ogg, opus, aac), so there is nothing to wire up. Add a file, reload, and it appears. Titles come from the file name with the [M O R D E C A I ...] tag removed. The running order is set by the ORDER list in index.html; anything not on that list goes in the middle, A to Z.
-
-Large files
-
-GitHub rejects any single file over 100 MB and warns above 50 MB. Stems add up fast. If you hit the limit, use Git LFS for audio/ and stems/, or publish the stems as a Release download instead of committing them.
 
 Credits and rights
 
