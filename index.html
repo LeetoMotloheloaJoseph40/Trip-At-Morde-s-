@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Trip At Morde’s — Mordecai (ThePark)</title>
+<meta name="description" content="A music project by Mordecai (ThePark), dedicated to everyone from ’06 and beyond.">
+<meta property="og:title" content="Trip At Morde’s — Mordecai (ThePark)">
+<meta property="og:image" content="https://leetomotloheloajoseph40.github.io/Trip-At-Morde-s-/artwork/artwork.jpg">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Syne:wght@600;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --sky:#dbe7d3; --ink:#17261d; --muted:#4a5d50; --jay:#2563a8; --path:#c9b48a; --card:#eef4e8;
+  color-scheme:light dark;
+}
+@media (prefers-color-scheme:dark){
+  :root{--sky:#101c16; --ink:#e4ede5; --muted:#9bb0a1; --jay:#6db3f2; --path:#8a7b57; --card:#16271e}
+}
+*{box-sizing:border-box}
+/* Cover art as a fixed background, with a scrim so the text stays readable */
+body::before{content:"";position:fixed;inset:0;z-index:-2;background:url("artwork/artwork.jpg") center 70%/cover no-repeat;filter:grayscale(1)}
+body::after{content:"";position:fixed;inset:0;z-index:-1;background:color-mix(in srgb,var(--sky) 74%,transparent)}
+@media (prefers-color-scheme:dark){body::after{background:color-mix(in srgb,var(--sky) 80%,transparent)}}
+ol{background:color-mix(in srgb,var(--sky) 55%,transparent);backdrop-filter:blur(3px)}
+
+html{scroll-padding-bottom:6rem}
+body{margin:0;background:var(--sky);position:relative;color:var(--ink);font:1.05rem/1.6 system-ui,-apple-system,"Segoe UI",sans-serif;padding-bottom:6rem}
+a{color:var(--jay);text-underline-offset:.2em}
+a:focus-visible,button:focus-visible{outline:3px solid var(--jay);outline-offset:3px}
+main{max-width:46rem;margin:0 auto;padding:4rem 1.25rem 2rem}
+h1{font-family:Syne,system-ui,sans-serif;font-weight:800;margin:0 0 1.5rem;line-height:1;
+   font-size:clamp(2.6rem,12vw,5.6rem);letter-spacing:.32em;word-break:break-word}
+h1 span{display:block}
+h1 .at{font-weight:600;font-size:.5em;color:var(--jay);letter-spacing:.5em;margin:.4em 0}
+.by{font-family:Syne,system-ui,sans-serif;font-weight:600;letter-spacing:.3em;margin:0 0 .25rem}
+.dedication{max-width:34rem;color:var(--muted);margin:0 0 3rem}
+h2{font-family:Syne,system-ui,sans-serif;font-weight:600;font-size:1.3rem;margin:0 0 .75rem}
+ol{list-style:none;margin:0;padding:0;border-top:2px solid var(--path)}
+li{border-bottom:1px solid color-mix(in srgb,var(--path) 55%,transparent)}
+.track{all:unset;box-sizing:border-box;display:grid;grid-template-columns:2.2rem 1fr auto;gap:.75rem;align-items:center;
+  width:100%;padding:.8rem .4rem;cursor:pointer}
+.track:hover:not(:disabled){background:var(--card)}
+.track:disabled{cursor:default;opacity:.6}
+.track:focus-visible{outline:3px solid var(--jay);outline-offset:-3px}
+.num{color:var(--muted);font-variant-numeric:tabular-nums}
+.state{font-size:.85rem;color:var(--muted)}
+.with{color:var(--muted);font-size:.85rem;margin-left:.4rem}
+#status{color:var(--muted)}
+.track[aria-current="true"]{background:var(--card);box-shadow:inset 4px 0 0 var(--jay)}
+.track[aria-current="true"] .state{color:var(--jay);font-weight:600}
+nav{margin:3rem 0 0;display:flex;flex-wrap:wrap;gap:.5rem 1.5rem}
+.player{position:fixed;left:0;right:0;bottom:0;background:var(--card);border-top:2px solid var(--path);padding:.7rem 1.25rem}
+.player div{max-width:46rem;margin:0 auto;display:flex;gap:1rem;align-items:center}
+.player strong{flex:0 1 11rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+audio{flex:1;min-width:0;height:2.4rem}
+@media (max-width:520px){.player div{flex-direction:column;align-items:stretch;gap:.3rem}.player strong{flex:none}}
+@media (prefers-reduced-motion:no-preference){h1 span{animation:in .7s ease both}h1 span:nth-child(2){animation-delay:.12s}h1 span:nth-child(3){animation-delay:.24s}}
+@keyframes in{from{opacity:0;transform:translateY(.4em)}to{opacity:1;transform:none}}
+</style>
+</head>
+<body>
+<main>
+  <p class="by">M O R D E C A I &nbsp;·&nbsp; T H E P A R K</p>
+  <h1><span>TRIP</span><span class="at">AT</span><span>MORDE’S</span></h1>
+  <p class="dedication">For everyone from ’06 and beyond, my friends, and the people I meet every day.</p>
+
+  <h2>Tracklist</h2>
+  <p id="status" role="status">Loading tracks…</p>
+  <ol id="tracks"></ol>
+
+  <nav aria-label="More">
+    <a href="https://github.com/LeetoMotloheloaJoseph40/Trip-At-Morde-s-/blob/main/about.md">About</a>
+    <a href="https://github.com/LeetoMotloheloaJoseph40/Trip-At-Morde-s-/blob/main/inspo.md">Inspiration</a>
+    <a href="https://github.com/LeetoMotloheloaJoseph40/Trip-At-Morde-s-/blob/main/thanks.md">Thanks</a>
+    <a href="https://github.com/LeetoMotloheloaJoseph40/Trip-At-Morde-s-">View the repo</a>
+  </nav>
+</main>
+
+<section class="player" aria-label="Player">
+  <div>
+    <strong id="now">Pick a track</strong>
+    <audio id="audio" controls preload="none"></audio>
+  </div>
+</section>
+
+<script>
+// The page reads the audio/ folder from GitHub, so new files show up without editing this file.
+const OWNER = 'LeetoMotloheloaJoseph40', REPO = 'Trip-At-Morde-s-', DIR = 'audio';
+const EXT = /\.(mp3|wav|flac|m4a|ogg|opus|aac)$/i;
+// Preferred running order (matched on title). Anything not listed goes in the middle, A to Z. First and last are pinned.
+const ORDER = ['welcome','antipops','atmordes','mars','myfriendkimfromtokyo','myguys0600','popsatit','radio',
+  'rigbyarockstarintro','rigbyandrabonas','starla','szathepark','thecrush','thedrums','trippiemordes','who','outro'];
+const key = s => s.toLowerCase().replace(/[^a-z0-9]/g, '');
+
+const list = document.getElementById('tracks');
+const status = document.getElementById('status');
+const audio = document.getElementById('audio');
+const now = document.getElementById('now');
+let tracks = [], current = -1;
+
+function parse(file) {
+  const base = file.replace(EXT, '');
+  const title = base.replace(/\s*\[.*$/, '').trim() || base;
+  let sub = (base.match(/\[(.*)$/) || [, ''])[1]
+    .replace(/M\s*O\s*R\s*D\s*E\s*C\s*A\s*I/gi, '').replace(/[\[\]]/g, '').replace(/^\s*x\s+/i, 'with ').trim();
+  return { file, title, sub };
+}
+function rank(t) {
+  const i = ORDER.indexOf(key(t.title));
+  if (i === 0) return -1;
+  if (i === ORDER.length - 1) return 9999;
+  return 1000;
+}
+function render() {
+  list.innerHTML = '';
+  tracks.forEach((tr, i) => {
+    const li = document.createElement('li');
+    const b = document.createElement('button');
+    b.className = 'track';
+    b.innerHTML = '<span class="num"></span><span class="title"><span class="name"></span><small class="with"></small></span><span class="state">Play</span>';
+    b.children[0].textContent = String(i + 1).padStart(2, '0');
+    b.querySelector('.name').textContent = tr.title;
+    b.querySelector('.with').textContent = tr.sub ? ' ' + tr.sub : '';
+    b.addEventListener('click', () => play(i));
+    li.appendChild(b);
+    list.appendChild(li);
+  });
+}
+function mark() {
+  [...list.querySelectorAll('.track')].forEach((b, i) => {
+    const on = i === current;
+    if (on) b.setAttribute('aria-current', 'true'); else b.removeAttribute('aria-current');
+    b.children[2].textContent = on ? (audio.paused ? 'Paused' : 'Playing') : 'Play';
+  });
+}
+function play(i) {
+  if (i === current) { audio.paused ? audio.play() : audio.pause(); return; }
+  current = i;
+  audio.src = DIR + '/' + encodeURIComponent(tracks[i].file);
+  now.textContent = tracks[i].title;
+  audio.play().catch(() => { now.textContent = 'Could not play ' + tracks[i].title; });
+  mark();
+}
+audio.addEventListener('play', mark);
+audio.addEventListener('pause', mark);
+audio.addEventListener('ended', () => { if (current + 1 < tracks.length) play(current + 1); });
+audio.addEventListener('error', () => { if (current >= 0) now.textContent = 'Could not load ' + tracks[current].title; });
+
+fetch(`https://api.github.com/repos/${OWNER}/${REPO}/contents/${DIR}`)
+  .then(r => { if (!r.ok) throw new Error(r.status); return r.json(); })
+  .then(files => {
+    tracks = files.filter(f => f.type === 'file' && EXT.test(f.name)).map(f => parse(f.name));
+    tracks.sort((a, b) => (rank(a) - rank(b)) || (rank(a) === 1000
+      ? a.title.localeCompare(b.title, undefined, { sensitivity: 'base' })
+      : 0));
+    if (!tracks.length) throw new Error('none');
+    status.hidden = true;
+    render();
+  })
+  .catch(() => {
+    status.textContent = 'Could not load the tracklist. Check that the audio/ folder is in the repo and the repo is public, then reload.';
+  });
+</script>
+</body>
+</html>
